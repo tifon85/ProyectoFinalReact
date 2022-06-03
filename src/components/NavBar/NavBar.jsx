@@ -6,9 +6,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import CartWidget from '../CartWidget/CartWidget'
 
 
-//import {Navbar,Container,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap'
-
-
 function Menu(){
     return (
         <>
@@ -35,8 +32,8 @@ function Menu(){
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
+                <CartWidget />
             </Navbar>
-            <CartWidget />
         </>
     )
 }

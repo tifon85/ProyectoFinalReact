@@ -1,8 +1,10 @@
 
+import carrito from '../../imagenes/carrito.svg'
+
 const CartWidget = () => {
   return (
     <div>
-        <img src="./assets/imagenes/carrito.svg" alt="Carrito"></img>
+        <img src={carrito} alt="Carrito"></img>
     </div>
   )
 }
