@@ -32,8 +32,8 @@ function Menu(){
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-                <CartWidget />
             </Navbar>
+            <CartWidget />
         </>
     )
 }
