@@ -1,8 +1,10 @@
 
-const ItemListContainer = ({greeting}) => {
+import ItemCount from '../ItemCount/ItemCount.jsx'
+
+const ItemListContainer = () => {
   return (
     <div>
-      <h1>{greeting}</h1>
+      <ItemCount stock="5" inicial="1"/>
     </div>
   )
 }
