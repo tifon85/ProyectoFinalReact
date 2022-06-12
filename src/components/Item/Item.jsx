@@ -7,8 +7,8 @@ function Item({prod}) {
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={prod.imagen} />
       <Card.Body>
-        <Card.Title>${prod.nobre}</Card.Title>
-        <Card.Text>${prod.descripcion}</Card.Text>
+        <Card.Title>{prod.nombre}</Card.Title>
+        <Card.Text>{prod.descripcion}</Card.Text>
         <Button variant="primary">Detalle Producto</Button>
       </Card.Body>
     </Card>
