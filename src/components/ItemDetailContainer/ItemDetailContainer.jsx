@@ -6,7 +6,7 @@ import ItemDetail from '../ItemDetail/ItemDetail.jsx';
 
 function ItemDetailContainer() {
 
-    const [item, setProductos] = useState([])
+    const [item, setProductos] = useState({})
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
