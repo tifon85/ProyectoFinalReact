@@ -21,7 +21,7 @@ const ItemListContainer = () => {
       setLoading(false)
     })
     .catch(err => console.log(err))
-    .finally(()=>console.log('Hecho'))
+    .finally(()=>console.log('Hecho, busqueda de todos los productos'))
   }, [])
 
   return (
