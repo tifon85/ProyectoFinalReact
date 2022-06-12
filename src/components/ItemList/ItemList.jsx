@@ -1,8 +1,9 @@
 
+import Item from '../Item/Item.jsx'
 
-function ItemList() {
+function ItemList({productos}) {
   return (
-    <div>ItemList</div>
+    productos.map(prod => <Item key={prod.id} prod={prod} />)
   )
 }
 
