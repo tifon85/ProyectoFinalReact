@@ -1,7 +1,10 @@
 
-import {useState} from 'react';
-import { useEffect } from 'react'
-import { getItem } from '../../api/productos.js';
+import {useState, useEffect} from 'react';
+
+import { useParams } from 'react-router-dom'
+
+import { getFetch } from '../../api/productos.js';
+
 import ItemDetail from '../ItemDetail/ItemDetail.jsx';
 
 function ItemDetailContainer() {
@@ -9,15 +12,17 @@ function ItemDetailContainer() {
     const [item, setProductos] = useState({})
     const [loading, setLoading] = useState(true)
 
+    const {id} = useParams()
+
     useEffect(()=>{
-        getItem(4)//llama a la api
+        getFetch()//llama a la api
         .then((resp)=> {
-          setProductos(resp)
+          setProductos(resp.find(producto => producto.id === id))
           setLoading(false)
         })
         .catch(err => console.log(err))
-        .finally(()=>//console.log('Hecho, busqueda de detalle producto')
-        console.log(item))
+        .finally(()=> 
+        console.log('Hecho, busqueda de detalle producto'))
       }, [])
     
 

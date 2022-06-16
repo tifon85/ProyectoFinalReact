@@ -3,7 +3,10 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+
 import CartWidget from '../CartWidget/CartWidget.jsx'
+
+import { Link,NavLink } from 'react-router-dom'
 
 
 function Menu(){
@@ -11,7 +14,11 @@ function Menu(){
         <>
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">Tienda Online</Navbar.Brand>
+                    <Navbar.Brand>
+                    <Link to='/'>
+                    Tienda Online
+                    </Link>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -19,19 +26,33 @@ function Menu(){
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">Calzado</Nav.Link>
+                            <NavLink to='/'>Home</NavLink>
+                            <NavLink to='/categorias/Zapatillas'>Calzado</NavLink>
                             <NavDropdown title="Indumentaria" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action3">Remeras</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Camisas</NavDropdown.Item>
+                                
+                                <NavDropdown.Item>
+                                <Link to='/categorias/Remeras'>
+                                Remeras
+                                </Link>
+                                </NavDropdown.Item>
+                                <NavDropdown.Item>
+                                <Link to='/categorias/Buzos'>
+                                Buzos
+                                </Link>
+                                </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action5">
-                                    Pantalones
+                                
+                                <NavDropdown.Item>
+                                <Link to='/categorias/Pantalones'>
+                                Pantalones
+                                </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
-                    <CartWidget />
+                    <Link to="/cart">
+                        <CartWidget />
+                    </Link>
                 </Container>
             </Navbar>
         </>
