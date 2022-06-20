@@ -14,7 +14,6 @@ const ItemListContainer = () => {
 
   const {categoriaId} = useParams()
 
-  console.log(categoriaId)
 
   useEffect(()=>{
     if (categoriaId) {
