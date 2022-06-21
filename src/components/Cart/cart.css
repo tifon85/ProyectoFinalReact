@@ -1,0 +1,27 @@
+
+.carrito{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.infocarrito{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.imagenCarrito{
+    width: 120px;
+    height: 120px;
+}
+
+.botonVaciarCarrito{
+    text-align: center;
+}
+
+li{
+    list-style-type: none;
+}
