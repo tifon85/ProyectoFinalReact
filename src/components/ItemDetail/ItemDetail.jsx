@@ -26,13 +26,13 @@ function ItemDetail({item}) {
   return (
     <div className="itemDetail">
       <div>
-        <img src={item.imagen}/>
+        <img src={item.imagen} alt="Producto" />
       </div>
       <div className="descripcionItem">
         <h2>{item.nombre}</h2>
         <p>Descripcion: {item.descripcion}</p>
         <i>Precio: ${item.precio}</i>
-        {cantidad==0 ?
+        {cantidad === 0 ?
           <ItemCount stock={5} inicial={1} onAdd={onAdd} />
           :
           <Link to='/cart'>
