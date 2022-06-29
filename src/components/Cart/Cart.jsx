@@ -3,6 +3,8 @@ import '../Cart/cart.css'
 
 import { useCartContext } from "../../contexts/cartContext"
 
+import { Link } from 'react-router-dom'
+
 
 const Cart = () => {
 
@@ -15,7 +17,7 @@ const Cart = () => {
           cart.map(item => <li key={item.id}>
             <div className="carrito">
               <div className="contenedorImagenCarrito">
-                <img src={item.imagen} className="imagenCarrito"/>
+                <img src={item.imagen} className="imagenCarrito" alt="Producto Carrito"/>
               </div>
               <div className="infoCarrito">
                 <p>Nombre: {item.nombre}</p>
@@ -28,9 +30,16 @@ const Cart = () => {
             </div></li>)
         }
       </ul>
-      <div className="botonVaciarCarrito">
-        <button onClick={vaciarCarrito}>Vaciar Carrito</button>
-      </div>
+      {
+        cart.length === 0 ?
+          <Link to='/'>
+          Volver al Catalogo
+          </Link>
+          :
+          <div className="botonVaciarCarrito">
+            <button onClick={vaciarCarrito}>Vaciar Carrito</button>
+          </div>
+      }
     </div>
   )
 }
