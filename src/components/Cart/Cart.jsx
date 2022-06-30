@@ -32,11 +32,15 @@ const Cart = () => {
       </ul>
       {
         cart.length === 0 ?
-          <Link to='/'>
-          Volver al Catalogo
-          </Link>
+          <>
+            <h2>No tiene productos en el carrito</h2>
+            <Link to='/'>
+            Volver al Catalogo
+            </Link>
+          </>
           :
           <div className="botonVaciarCarrito">
+            <h2>Precio Total: ${cart.reduce((acumulado,item) => acumulado + (item.precio * item.cantidad), 0)}</h2>
             <button onClick={vaciarCarrito}>Vaciar Carrito</button>
           </div>
       }

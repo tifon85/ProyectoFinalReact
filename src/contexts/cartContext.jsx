@@ -7,11 +7,13 @@ export const CartContextPorvider = ({children}) => {
 
     //aqui van a estar los estados y funciones globales
     const [cart, setCart] = useState([])
+    const [itemCount,setItemCount] = useState(0)
 
     const addToCart = (item) => {
         let prod = cart.find(producto => producto.id === item.id)
-        if(prod==undefined){
+        if(!prod){
             setCart([...cart,item])/*copio todo lo que tiene cart y le agrego el item*/
+            setItemCount(itemCount + item.cantidad)
         }else{
             cart.forEach(producto => {
                 if(producto.id===item.id){
@@ -23,24 +25,28 @@ export const CartContextPorvider = ({children}) => {
 
     const vaciarCarrito = () => {
         setCart([])
+        setItemCount(0)
     }
 
     const removeItem = (itemId) => {
         const prod = cart.find(producto => producto.id === itemId)
-        if(prod!=undefined){
-            setCart(cart.filter(producto => producto.id != itemId))
+        const unidades = prod.cantidad
+        if(prod){
+            setCart(cart.filter(producto => producto.id !== itemId))
+            setItemCount(itemCount - unidades)
         }
     }
 
     const isInCart = (id) => {
         const prod = cart.find(producto => producto.id === id)
-        return (prod==undefined ? true:false)
+        return (!prod ? true:false)
     }
 
     return(
         <CartContext.Provider
             value={{
                 cart,
+                itemCount,
                 addToCart,
                 vaciarCarrito,
                 removeItem,
