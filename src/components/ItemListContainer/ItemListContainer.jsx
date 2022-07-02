@@ -1,21 +1,48 @@
-
 import {useState,useEffect} from 'react';
-
 import { useParams } from 'react-router-dom';
-
-import { getFetch } from '../../api/productos.js';
-
+import {getFetch} from '../../api/productos.js'
 import ItemList from '../ItemList/ItemList.jsx'
+import { collection, getDocs, getFirestore } from 'firebase/firestore'
 
 const ItemListContainer = () => {
+
+  //const [bool, setBool] = useState(true) 
 
   const [productos, setProductos] = useState([])
   const [loading, setLoading] = useState(true)
 
   const {categoriaId} = useParams()
 
+  /*useEffect(() => {
 
-  useEffect(()=>{
+    const db = getFirestore() // crea conexion con Firestore
+    const queryCollection = collection(db, 'products')
+    getDocs(queryCollection)
+    .then(resp => console.log(resp)*/ /*setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()}))] )*//*)
+    .catch(err => console.log(err))
+    .finally(() => setLoading(false))
+  }, [categoriaId])*/
+
+  useEffect(() => {
+
+    if (categoriaId) {
+      const db = getFirestore() // crea conexion con Firestore
+      const queryCollection = collection(db, 'products')
+      getDocs(queryCollection)
+      .then(resp => setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()})).filter(productos => productos.categoria === categoriaId)] ))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false))
+    }else{
+      const db = getFirestore() // crea conexion con Firestore
+      const queryCollection = collection(db, 'products')
+      getDocs(queryCollection)
+      .then(resp => setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()}))] ))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false))
+    }
+  }, [categoriaId])
+
+   /*useEffect(()=>{
     if (categoriaId) {
       getFetch()//llama a la api
       .then((resp)=> {
@@ -31,7 +58,7 @@ const ItemListContainer = () => {
       })
       .catch(err => console.log(err))
     }
-  }, [categoriaId])
+  }, [categoriaId]) */
 
   return (
     <div>
