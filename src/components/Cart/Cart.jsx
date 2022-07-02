@@ -5,7 +5,6 @@ import { useCartContext } from "../../contexts/cartContext"
 
 import { Link } from 'react-router-dom'
 
-
 const Cart = () => {
 
   const { cart, vaciarCarrito, removeItem} = useCartContext()
