@@ -1,6 +1,5 @@
 import {useState,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import {getFetch} from '../../api/productos.js'
 import ItemList from '../ItemList/ItemList.jsx'
 import { collection, getDocs, getFirestore } from 'firebase/firestore'
 
@@ -18,10 +17,10 @@ const ItemListContainer = () => {
     const db = getFirestore() // crea conexion con Firestore
     const queryCollection = collection(db, 'products')
     getDocs(queryCollection)
-    .then(resp => console.log(resp)*/ /*setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()}))] )*//*)
+    .then(resp => setProductos( resp.docs.map( item => ( {id: item.id, ...item.data()} ) )  ))
     .catch(err => console.log(err))
     .finally(() => setLoading(false))
-  }, [categoriaId])*/
+  }, [])*/
 
   useEffect(() => {
 
@@ -29,14 +28,14 @@ const ItemListContainer = () => {
       const db = getFirestore() // crea conexion con Firestore
       const queryCollection = collection(db, 'products')
       getDocs(queryCollection)
-      .then(resp => setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()})).filter(productos => productos.categoria === categoriaId)] ))
+      .then(resp => setProductos( resp.docs.map( item => ({id: item.id, ...item.data()})).filter(productos => productos.categoria === categoriaId) ))
       .catch(err => console.log(err))
       .finally(() => setLoading(false))
     }else{
       const db = getFirestore() // crea conexion con Firestore
       const queryCollection = collection(db, 'products')
       getDocs(queryCollection)
-      .then(resp => setProductos( [resp.docs.map( item => ({id: item.id, ...item.data()}))] ))
+      .then(resp => setProductos( resp.docs.map( item => ({id: item.id, ...item.data()})) ))
       .catch(err => console.log(err))
       .finally(() => setLoading(false))
     }
