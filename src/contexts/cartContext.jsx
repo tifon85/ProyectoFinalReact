@@ -23,6 +23,10 @@ export const CartContextPorvider = ({children}) => {
         }
     }
 
+    const precioTotal = () => {
+        return cartList.reduce((contador, prod) => contador + (prod.cantidad * prod.price) ,0)
+    }
+
     const vaciarCarrito = () => {
         setCart([])
         setItemCount(0)
@@ -50,7 +54,7 @@ export const CartContextPorvider = ({children}) => {
                 addToCart,
                 vaciarCarrito,
                 removeItem,
-                isInCart
+                precioTotal
             }/*en este value agrego los estados y funciones que quiero que sean globales en este contexto*/}
         >
             {children}
