@@ -24,7 +24,7 @@ export const CartContextPorvider = ({children}) => {
     }
 
     const precioTotal = () => {
-        return cartList.reduce((contador, prod) => contador + (prod.cantidad * prod.price) ,0)
+        return cart.reduce((contador, prod) => contador + (prod.cantidad * prod.precio) ,0)
     }
 
     const vaciarCarrito = () => {

@@ -17,32 +17,31 @@ const Cart = () => {
 
     orden.items = cart.map(cartItem => {
         const id = cartItem.id
-        const nombre = cartItem.name
-        const precio = cartItem.price * cartItem.cantidad
+        const nombre = cartItem.nombre
+        const precio = cartItem.precio * cartItem.cantidad
         const cantidad = cartItem.cantidad
         
-        return {id, nombre, precio, cantidad}   
+        return {id, nombre, precio, cantidad}
     })
 
-    // insertar
+    // insertar la orden
     const db = getFirestore()
     const orderCollection = collection(db, 'orders')
     addDoc(orderCollection, orden)
-    .then(resp => console.log(resp.id) )
 
     //actualizar el stock
     const queryCollectionStock = collection(db, 'items')
 
     const queryActulizarStock = await query(
-        queryCollectionStock, //                   ['jlksjfdgl','asljdfks'] -> ejemplo del map ,  
-        where( documentId() , 'in', cart.map(it => it.id) ) // in es que estén en ..         
+        queryCollectionStock,
+        where( documentId() , 'in', cart.map(it => it.id) )       
     )
 
     const batch = writeBatch(db)
 
     await getDocs(queryActulizarStock)
     .then(resp => resp.docs.forEach(res => batch.update(res.ref, {
-          stock: res.data().stock - cart.find(item => item.id === res.id).cantidad
+          stock: res.data().stock - cart.find(item => item.id === res.id).stock
     }) ))
     .finally(()=> vaciarCarrito())
 
@@ -80,7 +79,7 @@ const Cart = () => {
           </>
           :
           <div className="botonVaciarCarrito">
-            <h2>Precio Total: {precioTotal()}</h2>
+            <h2>Precio Total: ${precioTotal()}</h2>
             <button onClick={vaciarCarrito}>Vaciar Carrito</button>
             <button onClick={createOrder}>Finalizar Compra</button>
           </div>
