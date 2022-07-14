@@ -9,6 +9,12 @@ export const CartContextPorvider = ({children}) => {
     const [cart, setCart] = useState([])
     const [itemCount,setItemCount] = useState(0)
 
+    const [orderID, setOrderID] = useState('')
+
+    const setearOrderID = (orderID) => {
+        setOrderID(orderID)
+    }
+
     const addToCart = (item) => {
         let prod = cart.find(producto => producto.id === item.id)
         if(!prod){
@@ -41,16 +47,18 @@ export const CartContextPorvider = ({children}) => {
         }
     }
 
-    const isInCart = (id) => {
+    /*const isInCart = (id) => {
         const prod = cart.find(producto => producto.id === id)
         return (!prod ? true:false)
-    }
+    }*/
 
     return(
         <CartContext.Provider
             value={{
                 cart,
                 itemCount,
+                orderID,
+                setearOrderID,
                 addToCart,
                 vaciarCarrito,
                 removeItem,
