@@ -1,22 +1,18 @@
-
-import '../Form/form.css'
-import {useState} from 'react';
+import {useForm} from "react-hook-form";
 import { addDoc, collection, documentId, getDocs, getFirestore, query, where, writeBatch } from "firebase/firestore"
 import { useCartContext } from "../../contexts/cartContext"
 
 export const Form = () => {
 
-    const { cart, precioTotal, vaciarCarrito, setearOrderID } = useCartContext()
+  const { cart, precioTotal, vaciarCarrito, setearOrderID } = useCartContext()
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+  const {register, formState: {errors}, handleSubmit} = useForm(); 
 
-  async function createOrder(name,email,phone) {
+  async function createOrder(data) {
     
     let orden = {}
     
-    orden.buyer = {name: name, email: email, phone: phone}
+    orden.buyer = {name: data.name, email: data.email, phone: data.phone}
     orden.total = precioTotal()
 
     orden.items = cart.map(cartItem => {
@@ -53,47 +49,35 @@ export const Form = () => {
     batch.commit()
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createOrder(name, email, phone)
-  }
-
   return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <input
-                    type="text"
-                    //className="form-control"
-                    id="nombre"
-                    placeholder="Ingrese su nombre"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
-            </div>
-            <div className="form-group">
-                <input
-                    type="text"
-                    //className="form-control"
-                    id="Email"
-                    placeholder="Ingrese su Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="form-group">
-                <input
-                    type="text"
-                    //className="form-control"
-                    id="Phone"
-                    placeholder="Ingrese su telefono"
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
-                />
-            </div>
-            <button type="submit" className="btn btn-primary">Finalizar compra</button>
+    <div>
+        <h2>Formulario</h2>
+        <form onSubmit={handleSubmit(createOrder)}>
+          <div>
+            <label>Nombre completo</label>
+            <input type="text" {...register('name', {
+              required: true
+            })} />
+            {errors.name?.type === 'required' && <p>El campo nombre es requerido</p>}
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="text" {...register('email',{
+              required: true
+            })} />
+            {errors.email?.type === 'required' && <p>El campo email es requerido</p>}
+          </div>
+          <div>
+            <label>Telefono</label>
+            <input type="text" {...register('phone', {
+              required: true
+            })} />
+            {errors.phone?.type === 'required' && <p>El campo Telefono es requerido</p>}
+          </div>
+          <input type="submit" value="Finalizar Compra"/>
         </form>
+    </div>
   )
-
 }
 
-export default Form
+export default Form;
