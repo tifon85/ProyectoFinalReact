@@ -5,11 +5,11 @@ import Item from '../Item/Item.jsx'
 import '../ItemList/items.css'
 
 const ItemList = memo(
-  ({productos}) => {
+  ({products}) => {
   console.log("itemList")
   return (
     <div className="items">
-        {productos.map(prod => <Item key={prod.id} prod={prod} />)}
+        {products.map(prod => <Item key={prod.id} prod={prod} />)}
     </div>
   )
 })

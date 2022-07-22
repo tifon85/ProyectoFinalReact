@@ -6,7 +6,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 function ItemDetailContainer() {
 
-    const [producto, setProducto] = useState({})
+    const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(true)
 
     const {id} = useParams()
@@ -16,21 +16,10 @@ function ItemDetailContainer() {
       const db = getFirestore() // crea conexion con Firestore
       const queryProduct = doc(db, 'products', id)
       getDoc(queryProduct) // esto es una promesa
-      .then(resp => setProducto( {id: resp.id, ...resp.data()} ))
+      .then(resp => setProduct( {id: resp.id, ...resp.data()} ))
       .catch(err => console.log(err))
       .finally(() => setLoading(false))
     }, [id])
-
-    /*useEffect(()=>{
-        getFetch()//llama a la api
-        .then((resp)=> {
-          setProductos(resp.find(producto => producto.id === id))
-          setLoading(false)
-        })
-        .catch(err => console.log(err))
-        .finally(()=> 
-        console.log('Hecho, busqueda de detalle producto'))
-      }, [])*/
     
 
 
@@ -40,7 +29,7 @@ function ItemDetailContainer() {
             loading ?
             <h2>Cargando...</h2>
             :
-            <ItemDetail item={producto}/>
+            <ItemDetail item={product}/>
         }
       </div>
   )
