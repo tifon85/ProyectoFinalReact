@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 function App() {
-  console.log('nico')
   return (
     <CartContextPorvider>{/*todo lo que está dentro de este componente pasa a ser una prop llamada children*/}
       <BrowserRouter>{/*dentro de este componente voy a poder usar funciones de react-router-dom*/}
