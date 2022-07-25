@@ -16,8 +16,6 @@ function ItemDetail({item}) {
     addToCart({...item, cantidad})
   }
 
-  console.log(cart)
-
   return (
     <div className="itemDetail">
       <div>

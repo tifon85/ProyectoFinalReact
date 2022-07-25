@@ -6,7 +6,6 @@ import '../ItemList/items.css'
 
 const ItemList = memo(
   ({products}) => {
-  console.log("itemList")
   return (
     <div className="items">
         {products.map(prod => <Item key={prod.id} prod={prod} />)}
