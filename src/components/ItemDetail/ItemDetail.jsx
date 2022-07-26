@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 function ItemDetail({item}) {
 
-  const {cart,addToCart} = useCartContext()
+  const {addToCart} = useCartContext()
   const [cantidad, setCantidad] = useState(0);
 
   const onAdd = (cantidad) => {
