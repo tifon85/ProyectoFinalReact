@@ -5,12 +5,14 @@ import '../Formulary/formulary.css'
 
 export const Formulary = () => {
 
-  const { cartList, totalPrice, emptyCart, saveOrderID } = useCartContext()
+  const { cartList, totalPrice, emptyCart, saveOrderID, changeProcessSale } = useCartContext()
 
-  const {register, formState: {errors}, handleSubmit} = useForm(); 
+  const {register, formState: {errors}, handleSubmit} = useForm();
 
   async function createOrder(data) {
-    
+
+    changeProcessSale(true)
+
     let orden = {}
     
     orden.buyer = {name: data.name, email: data.email, phone: data.phone}
@@ -30,6 +32,7 @@ export const Formulary = () => {
     const orderCollection = collection(db, 'orders')
     addDoc(orderCollection, orden)
     .then(resp => saveOrderID(resp.id))
+    .finally(() => changeProcessSale(false))
 
     //actualizar el stock
     const queryCollectionStock = collection(db, 'products')
@@ -45,7 +48,7 @@ export const Formulary = () => {
     .then(resp => resp.docs.forEach(res => batch.update(res.ref, {
       stock: res.data().stock - cartList.find(item => item.id === res.id).cantidad
     })))
-    .finally(()=> emptyCart())
+    .finally(() => emptyCart())
 
     batch.commit()
   }
@@ -64,9 +67,11 @@ export const Formulary = () => {
           <div>
             <label>Email</label>
             <input type="text" {...register('email',{
-              required: true
+              required: true,
+              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
             })} />
             {errors.email?.type === 'required' && <p>El campo email es requerido</p>}
+            {errors.email?.type === 'pattern' && <p>El formato del mail es incorrecto</p>}
           </div>
           <div>
             <label>Telefono</label>

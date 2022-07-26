@@ -12,8 +12,8 @@ function ItemDetail({item}) {
   const [cantidad, setCantidad] = useState(0);
 
   const onAdd = (cantidad) => {
-    setCantidad(cantidad)
-    addToCart({...item, cantidad})
+      setCantidad(cantidad)
+      addToCart({...item, cantidad})
   }
 
   return (
@@ -26,7 +26,7 @@ function ItemDetail({item}) {
         <p>Descripcion: {item.descripcion}</p>
         <i>Precio: ${item.precio}</i>
         {cantidad === 0 ?
-          (item.stock===0 ?
+            (item.stock===0 ?
             <h2>SIN STOCK</h2>
             :
             <ItemCount stock={item.stock} inicial={1} onAdd={onAdd} />)

@@ -5,8 +5,6 @@ import { collection, getDocs, getFirestore, query, where } from 'firebase/firest
 
 const ItemListContainer = () => {
 
-  //const [bool, setBool] = useState(true) 
-
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 

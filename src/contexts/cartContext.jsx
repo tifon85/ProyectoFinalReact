@@ -11,8 +11,14 @@ export const CartContextPorvider = ({children}) => {
 
     const [orderID, setOrderID] = useState('')
 
+    const [processSale,setProcessSale] = useState(false)
+
     const saveOrderID = (orderID) => {
         setOrderID(orderID)
+    }
+
+    const changeProcessSale = (state) => {
+        setProcessSale(state)
     }
 
     const addToCart = (item) => {
@@ -63,11 +69,13 @@ export const CartContextPorvider = ({children}) => {
                 cartList,
                 itemCount,
                 orderID,
+                processSale,
                 saveOrderID,
                 addToCart,
                 emptyCart,
                 removeItem,
-                totalPrice
+                totalPrice,
+                changeProcessSale
             }/*en este value agrego los estados y funciones que quiero que sean globales en este contexto*/}
         >
             {children}
